@@ -65,4 +65,7 @@ To use:
 
 ## Localization
 You will need the TF tree that connects /UTM to /map frame. This can be done by using robot_localization package: https://github.com/cra-ros-pkg/robot_localization.
+<p align="middle">
+  <img src="https://github.com/hngu97/Outdoor_Navigation/blob/master/non_catkin/images/tf_tree.png" title="UTM TF tree" width="80%" height="80%">
+</p>
 
