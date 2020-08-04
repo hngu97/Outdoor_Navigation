@@ -1,0 +1,29 @@
+#map {
+  position: absolute;
+  height: 100%;
+  width: 80%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+#waypointCSS
+{
+  padding-left: 10px;
+}
+
+#buttonGroup
+{
+  padding-left: 10px;
+}
+
+hr.new
+{
+}

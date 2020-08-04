@@ -1,0 +1,18 @@
+<launch>
+  <param name="use_sim_time" value="false"/>
+
+  <node pkg="rosaria" type="RosAria" name="RosAria" output="screen">
+    <param name="port" value="/dev/ttyUSB0"/>
+    <param name="publish_aria_lasers" value="false"/>
+    <param name="tf_publisher" value="true"/>
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="utm" args="0 0 0 0 0 0 1 utm map 10" />
+  <node pkg="tf" type="static_transform_publisher" name="cartographer_node" args="0 0 0 0 0 0 1 map odom 50" />
+  <node pkg="tf" type="static_transform_publisher" name="bl_bft" args="0 0 0 0 0 0 1 base_link base_footprint 50" />
+  <node pkg="tf" type="static_transform_publisher" name="bft_imu" args="0.20 0 0.25 0 0 0 1 base_footprint imu_link 50" />
+  <node pkg="tf" type="static_transform_publisher" name="bft_gps" args="0 0 1.10 0 0 0 1 base_footprint gps 50" />
+  <node pkg="tf" type="static_transform_publisher" name="bft_lidar" args="0 0 0.25 0 0 0 1 base_footprint laser 50" />
+  <node pkg="tf" type="static_transform_publisher" name="bft_camera" args="0.18 0 0.56 0 0 0 1 base_footprint camera_link 50" />
+
+</launch>

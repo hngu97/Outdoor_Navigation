@@ -1,0 +1,31 @@
+local_costmap:
+  global_frame: odom
+  robot_base_frame: base_link
+  #map_type: voxel
+  robot_radius: 0.28
+  update_frequency: 10.0
+  publish_frequency: 5.0
+  static_map: false
+  rolling_window: true
+  width: 8.0
+  height: 8.0
+  origin_x: 0.0
+  origin_y: 0.0
+  resolution: 0.05
+  transform_tolerance: 0.2
+
+  plugins:
+  - name: obstacles
+    type: "costmap_2d::ObstacleLayer"
+  - name: inflation
+    type: "costmap_2d::InflationLayer"
+
+  obstacles:
+    observation_sources: rplidar
+    rplidar: {sensor_frame: laser, data_type: LaserScan, topic: /scan, marking: true, clearing: true, max_obstacle_height: 1.8, min_obstacle_height: 0.1, obstacle_range: 3.8, raytrace_range: 4.0, inf_is_valid: true}
+    track_unknown_space: false
+    footprint_clearing_enabled: true
+
+  inflation:
+    inflation_radius: 0.30
+    cost_scaling_factor: 10

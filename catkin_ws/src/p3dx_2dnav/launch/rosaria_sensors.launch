@@ -1,0 +1,54 @@
+<launch>
+  <param name="use_sim_time" value="false"/>
+
+<!--____________________ROSARIA______________________-->
+
+  <node pkg="rosaria" type="RosAria" name="RosAria" output="screen">
+    <param name="port" value="/dev/ttyUSB0"/>
+  </node>
+
+
+<!--____________________GPS___________________-->
+
+  <node name="nmea_serial_driver_node" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="screen">
+    <param name="port" value="/dev/ttyUSB1"/>
+    <param name="baud" value="9600" />
+    <param name="frame_id" value="gps" />
+    <param name="use_GNSS_time" value="False" />
+    <param name="time_ref_source" value="gps" />
+    <param name="useRMC" value="False" />
+  </node>
+
+<!--_______________________UM7______________________-->
+
+  <node pkg="um7" type="um7_driver" name="um7_driver">
+    <param name="update_rate" value="20"/>
+    <param name="mag_updates" value="false"/>
+    <param name="quat_mode" value="true"/>
+    <param name="zero_gyros" value="true"/>
+    <param name="port" value="/dev/ttyUSB2"/>
+    <param name="baud" value="1152s00"/>
+    <param name="frame_id" value="imu_link"/>
+    <param name="tf_ned_to_enu" value="false"/>
+    <param name="orientation_in_robot_frame" value="true"/>
+    <param name="use_magnetic_field_msg" value="true"/>
+  </node>
+
+<!--________________________RPLIDAR__________________________-->
+
+  <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+    <param name="serial_port"         type="string" value="/dev/ttyUSB3"/>
+    <param name="serial_baudrate"     type="int"    value="115200"/>
+    <param name="frame_id"            type="string" value="laser"/>
+    <param name="inverted"            type="bool"   value="false"/>
+    <param name="angle_compensate"    type="bool"   value="false"/>
+  </node>
+
+<!--________________________TF__________________________-->
+
+  <node pkg="tf" type="static_transform_publisher" name="bl_bft" args="0 0 0 0 0 0 1 base_link base_footprint 50" />
+  <node pkg="tf" type="static_transform_publisher" name="bft_imu" args="0.20 0 0.25 0 0 0 1 base_footprint imu_link 50" />
+  <node pkg="tf" type="static_transform_publisher" name="bft_gps" args="0 0 0.6 0 0 0 1 base_footprint gps 50" />
+  <node pkg="tf" type="static_transform_publisher" name="bft_lidar" args="0 0 0.25 0 0 0 1 base_footprint laser 50" />
+
+</launch>

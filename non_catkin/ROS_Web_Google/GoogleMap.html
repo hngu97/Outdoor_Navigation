@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Map GPS Tracking</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/GoogleMapStyle.css" />
+    <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+    <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <div>
+      <strong style="padding-left:5px;">Connection Status: </strong>
+      <span id="status"></span>
+    </div>
+    <br>
+
+    <div>
+      <form>
+        <strong id='From' style="padding-left:5px;">From:</strong>
+        <input type="text" id="fromLat" size="17">
+        <input type="text" id="fromLng" size="17">
+      </form>
+      <form>
+        <strong id='To' style="padding-left:5px;">To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+        <input type="text" id="toLat" size="17">
+        <input type="text" id="toLng" size="17">
+      </form>
+    </div>
+
+    <br>
+
+    <div class="btn-group" id="buttonGroup">
+      <button id="getPath" onclick="getPath()">Get Path</button>
+      <button id="publishPath" onclick=pathPubTimerHandle()>Publish Path</button>
+    </div>
+    <br>
+    <br>
+    <hr class="new">
+    <br>
+    <div>
+      <form style="padding-left:10px;">
+        <input type="text" id="waypointLat" size="17">
+        <input type="text" id="waypointLng" size="17">
+        <button type="button" onclick="addWaypoint()"> Add Waypoint </button>
+      </form>
+    </div>
+
+    <br>
+    <div id="waypointList"></div>
+    <br>
+    <button id="publishWaypoints" onclick="waypointsPubTimerHandle()" style="margin-left:5px;">Publish Waypoints</button>
+
+    <!--
+    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+      <input type="checkbox" id="switch-1" onclick="recordingStatusPubTimerHandle()" class="mdl-switch__input">
+      <span class="mdl-switch__label">REC</span>
+    </label>
+    -->
+    <script src="js/GoogleMapRosInit.js"></script>
+    <script src="js/GoogleMapDisplay.js"></script>
+    <!-- Add your key in the script below -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
+    <script src="js/GoogleMapGPSSub.js"></script>
+    <script src="js/GoogleMapPathPublisher.js"></script>
+    <script src="js/RecordingStatus.js"></script>
+
+  </body>
+</html>
